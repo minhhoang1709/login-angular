@@ -1,0 +1,56 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+
+      <span class="login100-form-title welcome-title">
+        Welcome
+      </span>
+      <span class="login100-form-title welcome-logo">
+        <i class="zmdi zmdi-font"></i>
+      </span>
+
+      <div class="wrap-input100 validate-input" data-validate="Enter username !">
+        <input class="input100" type="text" name="username" (focus)="onUsernameFocus()" (blur)="onBlur()" #input100>
+        <span class="focus-input100" data-placeholder="Username"></span>
+      </div>
+
+      <div class="wrap-input100 validate-input" data-validate="Enter password !">
+        <span class="btn-show-pass" (click)="showPass()">
+          <i class="zmdi zmdi-eye" #eyeDiv></i>
+        </span>
+        <input class="input100" type="password" name="pass" (focus)="onPasswordFocus()" (blur)="onBlur()" #inputPass>
+        <span class="focus-input100" data-placeholder="Password"></span>
+      </div>
+
+      <div class="wrap-input100 validate-input" data-validate="The password is not match !">
+        <span class="btn-show-pass" (click)="showConfirmPass()">
+          <i class="zmdi zmdi-eye" #eyeConfirmDiv></i>
+        </span>
+        <input class="input100" type="password" name="pass" (focus)="onConfirmPasswordFocus()" (blur)="onBlur()"
+          #inputConfirmPass>
+        <span class="focus-input100" data-placeholder="Password"></span>
+      </div>
+
+      <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+          <div class="login100-form-bgbtn"></div>
+          <button class="login100-form-btn" (click)="validate()">
+            Sign up
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <span class="txt1">
+          Already have an account?
+        </span>
+
+        <a [routerLink]="['/log-in']" class="txt2">
+          Login
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div id="dropDownSelect1"></div>

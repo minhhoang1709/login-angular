@@ -1,0 +1,26 @@
+<svg width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+
+ <mask height="29" width="40" y="0" x="656" maskUnits="userSpaceOnUse" id="mask0">
+  <path id="svg_1" fill="white" d="m656.152,0.63318l39.227,0l0,27.53882l-39.227,0l0,-27.53882l0,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+ </mask>
+ <mask height="1" width="1" y="15" x="656" maskUnits="userSpaceOnUse" id="mask1">
+  <path id="svg_2" fill="white" d="m656.138,15.361l0,0.6061l0.689,0l0,-0.6061l-0.689,0l0,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+ </mask>
+ <mask height="2" width="1" y="15" x="656" maskUnits="userSpaceOnUse" id="mask2">
+  <path id="svg_3" fill="white" d="m656.138,15.63l0,0.6061l0.689,0l0,-0.6061l-0.689,0l0,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+ </mask>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="42" width="42" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_34" fill="#95C1EB" d="m687.403,0.64894c0.001,-0.00546 0.002,-0.01091 0.004,-0.01576l0.174,0c-0.056,0.02727 -0.117,0.02121 -0.178,0.01576z" clip-rule="evenodd" fill-rule="evenodd"/>
+  <path id="svg_35" fill="#97C2EB" d="m688.261,0.64894c-0.06,0.00303 -0.121,0.01091 -0.178,-0.01576l0.176,0c0.015,0.00364 0.016,0.00909 0.002,0.01576z" clip-rule="evenodd" fill-rule="evenodd"/>
+  <path id="svg_36" fill="#CBE0F5" d="m688.261,0.64894l-0.002,-0.01576l0.109,0c0,0.00485 0,0.01091 0.001,0.01576c-0.037,0 -0.072,0 -0.108,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+  <g id="svg_46">
+   <path id="svg_44" fill="#4C4C4C" d="m36.312,30.75l-7.812,0l0,-10.75l-8.688,8.6875l-8.687,-8.6875l0,10.75l-7.813,0l-0.25,0c3.5,5.5625 9.688,9.3125 16.75,9.3125c7.063,0 13.25,-3.6875 16.75,-9.3125l-0.25,0z"/>
+   <path id="svg_45" fill="#FF6B01" d="m7,26.625l0,-16.5l12.812,12.8125l12.813,-12.8125l0,16.5l5.937,0c0.688,-2 1.063,-4.125 1.063,-6.375c0,-10.9375 -8.875,-19.8125 -19.813,-19.8125c-10.937,0 -19.812,8.875 -19.812,19.8125c0,2.25 0.375,4.375 1.062,6.375l5.938,0z"/>
+  </g>
+ </g>
+</svg>

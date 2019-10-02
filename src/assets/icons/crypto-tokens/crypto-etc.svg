@@ -1,0 +1,32 @@
+<svg width="41" height="41" xmlns="http://www.w3.org/2000/svg">
+
+ <mask height="29" width="40" y="0" x="656" maskUnits="userSpaceOnUse" id="mask0">
+  <path id="svg_1" fill="white" d="m656.152,0.63318l39.227,0l0,27.53882l-39.227,0l0,-27.53882l0,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+ </mask>
+ <mask height="1" width="1" y="15" x="656" maskUnits="userSpaceOnUse" id="mask1">
+  <path id="svg_2" fill="white" d="m656.138,15.361l0,0.6061l0.689,0l0,-0.6061l-0.689,0l0,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+ </mask>
+ <mask height="2" width="1" y="15" x="656" maskUnits="userSpaceOnUse" id="mask2">
+  <path id="svg_3" fill="white" d="m656.138,15.63l0,0.6061l0.689,0l0,-0.6061l-0.689,0l0,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+ </mask>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="43" width="43" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_34" fill="#95C1EB" d="m687.403,0.64894c0.001,-0.00546 0.002,-0.01091 0.004,-0.01576l0.174,0c-0.056,0.02727 -0.117,0.02121 -0.178,0.01576z" clip-rule="evenodd" fill-rule="evenodd"/>
+  <path id="svg_35" fill="#97C2EB" d="m688.261,0.64894c-0.06,0.00303 -0.121,0.01091 -0.178,-0.01576l0.176,0c0.015,0.00364 0.016,0.00909 0.002,0.01576z" clip-rule="evenodd" fill-rule="evenodd"/>
+  <path id="svg_36" fill="#CBE0F5" d="m688.261,0.64894l-0.002,-0.01576l0.109,0c0,0.00485 0,0.01091 0.001,0.01576c-0.037,0 -0.072,0 -0.108,0z" clip-rule="evenodd" fill-rule="evenodd"/>
+  <g id="svg_46">
+   <path id="svg_18" fill="#0C8312" d="m20.75,13l0,-11.5l12.125,17.9375l-12.125,-6.4375z"/>
+   <path id="svg_19" fill="#0C8312" d="m20.75,29.5625l0,11.5l12.125,-17.9375l-12.125,6.4375z"/>
+   <path id="svg_20" fill="#0C8312" d="m20.75,22.375l0,-7.3125l11.875,6.25l-11.875,1.0625z"/>
+   <path id="svg_21" fill="#034C03" d="m20.75,27.6875l0,-5.3125l11.875,-1.0625l-11.875,6.375z"/>
+   <path id="svg_22" fill="#3CB93C" d="m20.75,13l0,-11.5l-12.125,17.9375l12.125,-6.4375z"/>
+   <path id="svg_23" fill="#3CB93C" d="m20.75,29.5625l0,11.5l-12.125,-17.9375l12.125,6.4375z"/>
+   <path id="svg_24" fill="#3CB93C" d="m20.75,22.375l0,-7.3125l-11.875,6.25l11.875,1.0625z"/>
+   <path id="svg_25" fill="#166816" d="m20.75,27.6875l0,-5.3125l-11.875,-1.0625l11.875,6.375z"/>
+  </g>
+ </g>
+</svg>

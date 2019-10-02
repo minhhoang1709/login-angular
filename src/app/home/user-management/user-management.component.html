@@ -1,0 +1,68 @@
+<div class="transactions">
+  <div class="transactions-header">
+    <div class="filter-container">
+
+      <div class="asset-filter">
+        <select name="asset-select" class="basic-filter-select" id="asset-select">
+          <option class="placeholder-option" value="" hidden disabled selected>Asset</option>
+          <option class="filter-option all-option" value="0">All</option>
+          <option [className]="'filter-option'" *ngFor="let coin of assets_list">{{coin}}</option>
+        </select>
+      </div>
+      <div class="transaction-filter">
+        <select name="asset-select" class="basic-filter-select" id="transaction-select">
+          <option class="placeholder-option" value="" hidden disabled selected>Transaction</option>
+          <option class="filter-option all-option" value=" 0">All</option>
+          <option class="filter-option" value="1">Deposit</option>
+          <option class="filter-option" value="2">Send</option>
+          <option class="filter-option" value="3">Earned interest</option>
+          <option class="filter-option" value="4">Paid interest</option>
+          <option class="filter-option" value="5">Late fees</option>
+        </select>
+      </div>
+      <div class="status-filer">
+        <select name="asset-select" class="basic-filter-select" id="status-select">
+          <option class="placeholder-option" value="" hidden disabled selected>Status</option>
+          <option class="filter-option all-option" value="0">All</option>
+          <option class="filter-option" value="1">Pending</option>
+          <option class="filter-option" value="2">Failed</option>
+          <option class="filter-option" value="3">Completed</option>
+        </select>
+      </div>
+      <div class="searching-button">
+        search
+      </div>
+    </div>
+    <div class="total-transactions">
+      Total Transaction 179
+    </div>
+  </div>
+
+  <table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+      <tr>
+        <th class="asset-sorter">Asset</th>
+        <th class="transactions-sorter">Transaction</th>
+        <th class="date-sorter">Date</th>
+        <th class="amount-sorter">Amount</th>
+        <th class="from-sorter">From</th>
+        <th class="to-sorter">To</th>
+        <th class="status-sorter">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor=" let element of CRYPTO_DATA" (click)="someClickHandler(element)">
+        <td class="asset-item" [ngClass]="element.asset.toLowerCase()">
+          {{ element.asset }}</td>
+        <td class="transaction-item">
+          <div class="transaction-type">{{ element.transaction }}</div>
+        </td>
+        <td>{{ element.date }}</td>
+        <td>{{ element.amount }}</td>
+        <td>{{ element.from }}</td>
+        <td>{{ element.to }}</td>
+        <td>{{ element.status }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,334 @@
+@import "../../assets/styles/variables.scss";
+
+table.dataTable thead .sorting_asc:nth-child(3) {
+  background-image: url('../../../assets/icons/icn-ascending-softer.svg');
+  background-position: 71.02% 50%;
+
+}
+
+table.dataTable thead .sorting_asc:nth-child(4) {
+  background-image: url('../../../assets/icons/icn-ascending-softer.svg');
+  background-position: 77.41% 50%;
+
+}
+
+table.dataTable thead .sorting_desc:nth-child(3) {
+  background-image: url('../../../assets/icons/icn-descending-softer.svg');
+  background-position: 71.02% 50%;
+
+}
+
+table.dataTable thead .sorting_desc:nth-child(4) {
+  background-image: url('../../../assets/icons/icn-descending-softer.svg');
+  background-position: 77.41% 50%;
+}
+
+table.dataTable thead .sorting:nth-child(3) {
+  background-image: url('../../../assets/icons/icn-softer.svg');
+  background-position: 71.02% 50%;
+}
+
+table.dataTable thead .sorting:nth-child(4) {
+  background-image: url('../../../assets/icons/icn-softer.svg');
+  background-position: 77.41% 50%;
+}
+
+table.dataTable thead .sorting_asc {
+  background-image: none;
+}
+
+table.dataTable thead .sorting_desc {
+  background-image: none;
+}
+
+table.dataTable thead .sorting {
+  background-image: none;
+}
+
+table.dataTable.no-footer {
+  border-bottom: 0px;
+}
+
+
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-left;
+}
+
+.example-full-width {
+  width: 100%;
+  height: 30px;
+}
+
+.mat-icon {
+  width: 14.4px;
+  height: 14.4px;
+}
+
+.basic-filter-select {
+  width: 130px;
+  height: 30px;
+  border: 1px solid #C6CACC;
+  box-sizing: border-box;
+  border-radius: 0.25rem;
+  background: url("../../../assets/icons/icn_dropdown_icon.svg") no-repeat 90% 50%;
+  padding-left: 0.75rem;
+  margin-left: 9px;
+  font-family: OpenSans-Regular;
+  font-size: 0.75rem;
+  line-height: 1.5rem;
+}
+
+.all-option {
+  color: #000000 !important;
+  font-weight: 700;
+}
+
+.filter-option {
+  font-family: SF-Pro-Display;
+  color: #5E6366;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.375rem;
+  // padding: 8px 16px;  
+  border-radius: 0px 0px 5px 5px !important;
+}
+
+.searching-button {
+  margin-left: 10px;
+  width: 91px;
+  height: 30px;
+  background: #001C91;
+  border-radius: 4px;
+  font-family: SF-Pro-Display;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.total-transactions {
+  font-family: SF-Pro-Display;
+  font-weight: 700;
+  color: #3E4345;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-self: flex-end;
+}
+
+.asset-sorter {
+  width: 9.23%;
+}
+
+.transactions-sorter {
+  width: 15.79%;
+}
+
+.date-sorter {
+  width: 15.44%;
+
+}
+
+.amount-sorter {
+  width: 15.53%;
+
+}
+
+.from-sorter {
+  width: 15.79%;
+}
+
+.to-sorter {
+  width: 15.79%;
+}
+
+.status-sorter {
+  width: 12.72%;
+}
+
+table.dataTable thead {
+  background-color: #F7F9FA;
+  text-align: center;
+  font-family: SF-Pro-Display;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 20px;
+  color: #919699;
+}
+
+table.dataTable thead th {
+  border-bottom: 2px solid #E3E5E6;
+  border-top: 0px;
+  height: 48px;
+  padding: 0px;
+
+}
+
+table.dataTable tr {
+  text-align: center;
+  font-family: SF-Pro-Display;
+  font-weight: 500;
+
+}
+
+table.dataTable td {
+  height: 48px;
+  padding: 0px;
+  border-bottom: 1px solid #E3E5E6;
+}
+
+.asset-item {
+  background-repeat: no-repeat;
+  background-size: 24.77px 24.77px;
+  background-position: 22.27% 50%;
+  padding-left: 4.1% !important;
+  text-align: start;
+
+}
+
+.btc {
+  background-image: url('../../../assets/icons/crypto-tokens/crypto-btc.svg');
+}
+
+.basic {
+  background-image: url('../../../assets/icons/crypto-tokens/crypto-basic.svg');
+}
+
+.eth {
+  background-image: url('../../../assets/icons/crypto-tokens/crypto-eth.svg');
+}
+
+.transaction-item {
+  background-image: url('../../../assets/icons/icn-li-style.svg');
+  background-repeat: no-repeat;
+  background-position: 22.22% 50%;
+  padding-left: 5.26% !important;
+
+}
+
+.transaction-type {
+  width: 50%;
+}
+
+::ng-deep .transaction-info {
+  height: 161px;
+  background-color: #F1F3F4;
+  margin-bottom: 76px;
+}
+
+::ng-deep .bottom {
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 200px;
+}
+
+::ng-deep .dataTables_paginate {
+  height: 28px;
+  display: flex;
+  justify-content: space-between;
+}
+
+::ng-deep .paginate_button {
+  height: 28px;
+  width: 28px;
+  border: 0px !important;
+  background: #F7F9FA !important;
+  border-radius: 4px !important;
+  color: #000000;
+  font-family: SF-Pro-Display;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  padding: 5.5px 0px 0px 0px !important;
+  text-align: center;
+  margin-right: 4px;
+}
+
+::ng-deep .paginate_button.current {
+  border: 0px !important;
+  background: #E3E5E6 !important;
+  font-weight: 700;
+}
+
+::ng-deep .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: #000000 !important;
+}
+
+::ng-deep .paginate_button.first {
+  text-indent: -9999px;
+  background: #FFFFFF !important;
+  border: 1px solid #C6CACC !important;
+  margin-right: 4px;
+  background: url('../../../assets/icons/icn-pagging-start-enabled.svg') no-repeat center !important;
+}
+
+::ng-deep .paginate_button.first.disabled {
+  background: url('../../../assets/icons/icn-pagging-start-disabled.svg') no-repeat center !important;
+}
+
+::ng-deep .paginate_button.previous {
+  text-indent: -9999px;
+  background: #FFFFFF !important;
+  border: 1px solid #C6CACC !important;
+  margin-right: 6.08px;
+  background: url('../../../assets/icons/icn-pagging-previous-enabled.svg') no-repeat center !important;
+}
+
+::ng-deep .paginate_button.previous.disabled {
+  background: url('../../../assets/icons/icn-pagging-previous-disabled.svg') no-repeat center !important;
+}
+
+::ng-deep .paginate_button.next {
+  text-indent: -9999px;
+  background: #FFFFFF !important;
+  border: 1px solid #C6CACC !important;
+  margin-left: 6.08px;
+  background: url('../../../assets/icons/icn-pagging-next-enabled.svg') no-repeat center !important;
+}
+
+::ng-deep .paginate_button.next.disabled {
+  background: url('../../../assets/icons/icn-pagging-next-disabled.svg') no-repeat center !important;
+}
+
+::ng-deep .paginate_button.last {
+  text-indent: -9999px;
+  background: #FFFFFF !important;
+  border: 1px solid #C6CACC !important;
+  margin-left: 4px;
+  background: url('../../../assets/icons/icn-pagging-end-enabled.svg') no-repeat center !important;
+}
+
+::ng-deep .paginate_button.last.disabled {
+  background: url('../../../assets/icons/icn-pagging-end-disabled.svg') no-repeat center !important;
+}
