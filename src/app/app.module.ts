@@ -13,6 +13,12 @@ import { UserManagementComponent } from './home/user-management/user-management.
 import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatIconModule } from '@angular/material';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfileComponent } from './home/profile/profile.component';
+import { FormsModule } from '@angular/forms';
+import { AdminHomeComponent } from './home/admin-home/admin-home.component';
+import { AdminHeaderComponent } from './home/admin-home/admin-header/admin-header.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { AuthGuard } from './shared/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,10 @@ import { HttpClientModule } from '@angular/common/http';
     SignUpComponent,
     LogInComponent,
     PasswordShowDirective,
-    UserManagementComponent
+    UserManagementComponent,
+    ProfileComponent,
+    AdminHomeComponent,
+    AdminHeaderComponent
 
   ],
   imports: [
@@ -36,9 +45,11 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatIconModule,
     HttpClientModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule,
+    SweetAlert2Module
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

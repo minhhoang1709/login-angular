@@ -8,28 +8,37 @@
         <span class="login100-form-title welcome-logo">
           <i class="zmdi zmdi-font"></i>
         </span>
-
-        <div class="wrap-input100 validate-input" data-validate="Enter username !">
-          <input class="input100" type="text" name="username" (focus)="onUsernameFocus()" (blur)="onBlur()" #input100>
-          <span class="focus-input100" data-placeholder="Username"></span>
-        </div>
-
-        <div class="wrap-input100 validate-input" data-validate="Enter password !">
-          <span class="btn-show-pass" (click)="showPass()">
-            <i class="zmdi zmdi-eye" #eyeDiv></i>
-          </span>
-          <input class="input100" type="password" name="pass" (focus)="onPasswordFocus()" (blur)="onBlur()" #inputPass>
-          <span class="focus-input100" data-placeholder="Password"></span>
-        </div>
-
-        <div class="container-login100-form-btn">
-          <div class="wrap-login100-form-btn">
-            <div class="login100-form-bgbtn"></div>
-            <button class="login100-form-btn" (click)="validate()">
-              Login
-            </button>
+        <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
+          <div class="wrap-input100 validate-input" data-validate="Enter username !">
+            <input class="input100" type="text" (focus)="onUsernameFocus()" (blur)="onBlur()" ngModel name="username"
+              #input100>
+            <span class="focus-input100" data-placeholder="Username"></span>
           </div>
-        </div>
+
+          <div class="wrap-input100 validate-input" data-validate="Enter password !">
+            <span class="btn-show-pass" (click)="showPass()">
+              <i class="zmdi zmdi-eye" #eyeDiv></i>
+            </span>
+            <input class="input100" type="password" (focus)="onPasswordFocus()" (blur)="onBlur()" ngModel
+              name="password" #inputPass>
+            <span class="focus-input100" data-placeholder="Password"></span>
+          </div>
+          <div class="admin-toggle">Admin Mode
+            <label class="switch">
+              <input [checked]="adminMode" (click)="onSwitch()" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" type="submit">
+                Login
+              </button>
+            </div>
+          </div>
+        </form>
+
 
         <div class="text-center">
           <span class="txt1">

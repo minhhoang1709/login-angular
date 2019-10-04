@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-export interface TransactionElement {
-  asset: string;
-  transaction: string;
-  date: string;
-  amount: string;
-  from: string;
-  to: string;
-  status: string;
+export interface UserElement {
+  username: string;
+  fullname: string;
+  birthday: string;
+  gender: string;
+  age: number;
 }
 
 @Component({
@@ -19,13 +18,14 @@ export interface TransactionElement {
 })
 export class UserManagementComponent implements OnInit {
 
-  CRYPTO_DATA: TransactionElement[] = [];
-  assets_list = [];
-  message = '';
+  USER_DATA: UserElement[] = [];
+  assetsList = [];
 
+  chosenUser: UserElement;
+  user;
   dtOptions: DataTables.Settings = {};
 
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private http: HttpClient) {
     this.matIconRegistry.addSvgIcon(
       'basic-datepicker-icon',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/icn_calendar.svg')
@@ -33,75 +33,51 @@ export class UserManagementComponent implements OnInit {
   }
 
   someClickHandler(info: any): void {
-    this.message = info.asset + ' - ' + info.transaction + ' - ' + info.date + ' - ' + info.amount;
-    console.log(this.message);
+    this.chosenUser = info;
   }
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
 
-    this.CRYPTO_DATA = [
-      { asset: 'BTC', transaction: 'Deposit', date: '2019-01-30 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Pending' },
-      { asset: 'BASIC', transaction: 'Send', date: '2019-01-29 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Pending' },
-      { asset: 'ETH', transaction: 'Earned interest', date: '2019-01-28 23:00:00', amount: '$1,234,567.00', from: 'BASIC', to: '0x073903b96.....', status: 'Failed' },
-      { asset: 'BTC', transaction: 'Paid interest', date: '2019-01-27 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: 'BASIC', status: 'Completed' },
-      { asset: 'BASIC', transaction: 'Late fees', date: '2019-01-26 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: 'BASIC', status: 'Completed' },
-      { asset: 'BASIC', transaction: 'Deposit', date: '2019-01-25 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' },
-      { asset: 'BTC', transaction: 'Send', date: '2019-01-24 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' },
-      { asset: 'BTC', transaction: 'Deposit', date: '2019-01-23 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' },
-      { asset: 'BASIC', transaction: 'Deposit', date: '2019-01-22 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: 'BASIC', status: 'Completed' },
-      { asset: 'BASIC', transaction: 'Deposit', date: '2019-01-21 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: 'BASIC', status: 'Completed' },
-      { asset: 'ETH', transaction: 'Deposit', date: '2019-01-20 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' },
-      { asset: 'ETH', transaction: 'Deposit', date: '2019-01-19 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' },
-      { asset: 'BTC', transaction: 'Send', date: '2019-01-24 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' },
-      { asset: 'BTC', transaction: 'Deposit', date: '2019-01-23 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' },
-      { asset: 'BASIC', transaction: 'Deposit', date: '2019-01-22 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: 'BASIC', status: 'Completed' },
-      { asset: 'BASIC', transaction: 'Deposit', date: '2019-01-21 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: 'BASIC', status: 'Completed' },
-      { asset: 'ETH', transaction: 'Deposit', date: '2019-01-20 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' },
-      { asset: 'ETH', transaction: 'Deposit', date: '2019-01-19 23:00:00', amount: '$1,234,567.00', from: '0x073903b96.....', to: '0x073903b96.....', status: 'Completed' }
-    ];
+    this.onGetUserList().subscribe((res) => {
+      this.USER_DATA = res;
+    });
 
-    this.assets_list = this.CRYPTO_DATA.map(a => a.asset);
-    this.assets_list = this.assets_list.filter((item, index) => this.assets_list.indexOf(item) === index);
+    this.assetsList = this.USER_DATA.map(a => a.username);
+    this.assetsList = this.assetsList.filter((item, index) => this.assetsList.indexOf(item) === index);
 
     this.dtOptions = {
-      dom: '<"top"i>rt<"transaction-info"><"bottom"p><"clear">',
+      dom: '<"top"i>rt<"bottom"p><"clear">',
       pagingType: 'full_numbers',
       stateSave: true,
       searching: false,
-      lengthChange: false,
+      pageLength: 2,
+      serverSide: true,
+      processing: true,
+      lengthChange: true,
       info: false,
       columns: [{
-        title: 'Asset',
-        data: 'asset'
+        title: 'Username',
+        data: 'username'
       }, {
-        title: 'Transaction',
-        data: 'transaction'
+        title: 'Fullname',
+        data: 'fullname'
       }, {
-        title: 'Date',
-        data: 'date'
+        title: 'Gender',
+        data: 'gender'
       }, {
-        title: 'Amount',
-        data: 'amount'
+        title: 'Age',
+        data: 'age'
       }, {
-        title: 'From',
-        data: 'from'
-      }, {
-        title: 'To',
-        data: 'to'
-      }, {
-        title: 'Status',
-        data: 'status'
+        title: 'Birthday',
+        data: 'birthday'
       }],
-      // rowCallback: (row: Node, data: any[] | Object, index: number) => {
-      //   const self = this;
-      //   // Unbind first in order to avoid any duplicate handler
-      //   // (see https://github.com/l-lin/angular-datatables/issues/87)
-      //   $('td', row).unbind('click');
-      //   $('td', row).bind('click', () => {
-      //     self.someClickHandler(data);
-      //   });
-      //   return row;
-      // }
     };
+  }
+
+  onGetUserList() {
+    return this.http.get<any>('http://localhost:3000/api/admin/list-users', {
+      headers: new HttpHeaders().set('Authorization', this.user.jwt)
+    });
   }
 
 }

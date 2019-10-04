@@ -1,75 +1,44 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
-import { AuthService } from '../shared/auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   showPassFlag: number;
   showConfirmPassFlag: number;
-  adminMode: boolean;
+  submitCheckFlag: number;
+  user;
   @ViewChild('eyeDiv', { static: true }) eyeDivRef: ElementRef;
   @ViewChild('eyeConfirmDiv', { static: true }) eyeConfirmDivRef: ElementRef;
+  @ViewChild('inputFullname', { static: true }) inputFullnameRef: ElementRef;
+  @ViewChild('inputAge', { static: true }) inputAgeRef: ElementRef;
+  @ViewChild('inputBirthday', { static: true }) inputBirthdayRef: ElementRef;
   @ViewChild('inputPass', { static: true }) inputPassRef: ElementRef;
   @ViewChild('inputConfirmPass', { static: true }) inputConfirmPassRef: ElementRef;
-  @ViewChild('input100', { static: true }) input100Ref: ElementRef;
-  constructor(private renderer: Renderer2, private authService: AuthService, private router: Router) { }
+  @ViewChild('inputSubmit', { static: true }) inputSubmitRef: ElementRef;
+  constructor(private renderer: Renderer2, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.showPassFlag = 0;
     this.showConfirmPassFlag = 0;
-    this.adminMode = false;
-  }
-
-  onSwitch() {
-    this.adminMode = !this.adminMode;
-  }
-
-  onBlur() {
-    if (this.input100Ref.nativeElement.value.trim() !== '') {
-      this.renderer.addClass(this.input100Ref.nativeElement, 'has-val');
-    } else {
-      this.renderer.removeClass(this.input100Ref.nativeElement, 'has-val');
-    }
-
-    if (this.inputPassRef.nativeElement.value.trim() !== '') {
-      this.renderer.addClass(this.inputPassRef.nativeElement, 'has-val');
-    } else {
-      this.renderer.removeClass(this.inputPassRef.nativeElement, 'has-val');
-    }
-
-    if (this.inputConfirmPassRef.nativeElement.value.trim() !== '') {
-      this.renderer.addClass(this.inputConfirmPassRef.nativeElement, 'has-val');
-    } else {
-      this.renderer.removeClass(this.inputConfirmPassRef.nativeElement, 'has-val');
-    }
+    this.submitCheckFlag = 0;
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user.birthday = this.user.birthday.substring(0, 10);
+    console.log(this.user);
 
   }
+
 
   validate() {
-    if (this.input100Ref.nativeElement.value.trim() === '') {
-      this.showValidate(this.input100Ref);
-      return false;
-    }
-
-    if (this.inputPassRef.nativeElement.value.trim() === '') {
-      this.showValidate(this.inputPassRef);
-      return false;
-    }
-
     if (this.inputConfirmPassRef.nativeElement.value.trim() !== this.inputPassRef.nativeElement.value.trim()) {
       this.showValidate(this.inputConfirmPassRef);
       return false;
     }
-
     return true;
-  }
-
-  onUsernameFocus() {
-    this.hideValidate(this.input100Ref);
   }
 
   onPasswordFocus() {
@@ -118,19 +87,21 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  onSignup(postData: { username: string; password: string }) {
+  onProfileChange(postData: { username: string, password: string, fullname: string, birthday: string, gender: string, age: number }) {
+    postData.username = this.user.username;
     if (this.validate()) {
-      if (this.adminMode) {
-        this.authService.adminSignup(postData.username, postData.password).subscribe(
-          result => this.router.navigate(['/log-in']),
-          err => alert("Account has existed !")
-        );
-      } else {
-        this.authService.userSignup(postData.username, postData.password).subscribe(
-          result => this.router.navigate(['/log-in']),
-          err => alert("Account has existed !")
-        );
-      }
+      this.http.put('http://localhost:3000/api/user/reset/' + this.user.username, postData, {
+        headers: new HttpHeaders().set('Authorization', this.user.jwt),
+      }).subscribe((res) => {
+        this.user.fullname = postData.fullname;
+        this.user.birthday = postData.birthday;
+        this.user.gender = postData.gender;
+        this.user.age = postData.age;
+        localStorage.setItem('currentUser', this.user);
+        alert(res);
+        this.router.navigate(['/home']);
+      });
     }
   }
+
 }

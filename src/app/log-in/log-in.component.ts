@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-log-in',
@@ -7,17 +9,23 @@ import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/co
 })
 export class LogInComponent implements OnInit {
   showPassFlag: number;
+  adminMode: boolean;
   @ViewChild('eyeDiv', { static: true }) eyeDivRef: ElementRef;
   @ViewChild('inputPass', { static: true }) inputPassRef: ElementRef;
   @ViewChild('input100', { static: true }) input100Ref: ElementRef;
 
   ngOnInit() {
     this.showPassFlag = 0;
+    this.adminMode = false;
     console.log(this.eyeDivRef);
     console.log(this.inputPassRef);
   }
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private authService: AuthService, private router: Router) {
+  }
+
+  onSwitch() {
+    this.adminMode = !this.adminMode;
   }
 
   onBlur() {
@@ -38,11 +46,14 @@ export class LogInComponent implements OnInit {
   validate() {
     if (this.input100Ref.nativeElement.value.trim() === '') {
       this.showValidate(this.input100Ref);
+      return false;
     }
 
     if (this.inputPassRef.nativeElement.value.trim() === '') {
       this.showValidate(this.inputPassRef);
+      return false;
     }
+    return true;
   }
 
   onUsernameFocus() {
@@ -77,4 +88,19 @@ export class LogInComponent implements OnInit {
     }
   }
 
+  onLogin(postData: { username: string; password: string }) {
+    if (this.validate()) {
+      if (this.adminMode) {
+        this.authService.adminLogin(postData.username, postData.password).subscribe(
+          result => this.router.navigate(['/home']),
+          err => alert("Wrong username or password")
+        );
+      } else {
+        this.authService.userLogin(postData.username, postData.password).subscribe(
+          result => this.router.navigate(['/home']),
+          err => alert("Wrong username or password")
+        );
+      }
+    }
+  }
 }

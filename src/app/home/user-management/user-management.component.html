@@ -1,68 +1,81 @@
-<div class="transactions">
-  <div class="transactions-header">
-    <div class="filter-container">
+<div class="user-management-container">
+  <div class="users-table">
+    <div class="table-header">
+      <div class="filter-container">
 
-      <div class="asset-filter">
-        <select name="asset-select" class="basic-filter-select" id="asset-select">
-          <option class="placeholder-option" value="" hidden disabled selected>Asset</option>
-          <option class="filter-option all-option" value="0">All</option>
-          <option [className]="'filter-option'" *ngFor="let coin of assets_list">{{coin}}</option>
-        </select>
+        <div class="gender-filter">
+          <select name="asset-select" class="filter-select" id="gendder-select">
+            <option class="placeholder-option" value="" hidden disabled selected>Gender</option>
+            <option class="filter-option all-option" value=" 0">All</option>
+            <option class="filter-option" value="1">Male</option>
+            <option class="filter-option" value="2">Female</option>
+          </select>
+        </div>
+
+        <div class="searching-button">
+          search
+        </div>
       </div>
-      <div class="transaction-filter">
-        <select name="asset-select" class="basic-filter-select" id="transaction-select">
-          <option class="placeholder-option" value="" hidden disabled selected>Transaction</option>
-          <option class="filter-option all-option" value=" 0">All</option>
-          <option class="filter-option" value="1">Deposit</option>
-          <option class="filter-option" value="2">Send</option>
-          <option class="filter-option" value="3">Earned interest</option>
-          <option class="filter-option" value="4">Paid interest</option>
-          <option class="filter-option" value="5">Late fees</option>
-        </select>
-      </div>
-      <div class="status-filer">
-        <select name="asset-select" class="basic-filter-select" id="status-select">
-          <option class="placeholder-option" value="" hidden disabled selected>Status</option>
-          <option class="filter-option all-option" value="0">All</option>
-          <option class="filter-option" value="1">Pending</option>
-          <option class="filter-option" value="2">Failed</option>
-          <option class="filter-option" value="3">Completed</option>
-        </select>
-      </div>
-      <div class="searching-button">
-        search
+      <div class="total-users">
+        Total Users 179
       </div>
     </div>
-    <div class="total-transactions">
-      Total Transaction 179
-    </div>
+
+    <table datatable [dtOptions]="dtOptions" class="row-border hover">
+      <thead>
+        <tr>
+          <th class="username-sorter">Username</th>
+          <th class="fullname-sorter">Fullname</th>
+          <th class="gender-sorter">Gender</th>
+          <th class="age-sorter">Age</th>
+          <th class="birthday-sorter">Birthday</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor=" let element of USER_DATA" (click)="someClickHandler(element)">
+          <td>{{ element.username }}</td>
+          <td>{{ element.fullname }}</td>
+          <td>{{ element.gender }}</td>
+          <td>{{ element.age }}</td>
+          <td>{{ element.birthday }}</td>
+
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <table datatable [dtOptions]="dtOptions" class="row-border hover">
-    <thead>
-      <tr>
-        <th class="asset-sorter">Asset</th>
-        <th class="transactions-sorter">Transaction</th>
-        <th class="date-sorter">Date</th>
-        <th class="amount-sorter">Amount</th>
-        <th class="from-sorter">From</th>
-        <th class="to-sorter">To</th>
-        <th class="status-sorter">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor=" let element of CRYPTO_DATA" (click)="someClickHandler(element)">
-        <td class="asset-item" [ngClass]="element.asset.toLowerCase()">
-          {{ element.asset }}</td>
-        <td class="transaction-item">
-          <div class="transaction-type">{{ element.transaction }}</div>
-        </td>
-        <td>{{ element.date }}</td>
-        <td>{{ element.amount }}</td>
-        <td>{{ element.from }}</td>
-        <td>{{ element.to }}</td>
-        <td>{{ element.status }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="user-information-container">
+    <div class="user-information-title information-title">
+      <h2>USER'S INFORMATION</h2>
+    </div>
+    <div class="user-name-container information-container">
+      <div class="user-name-title information-title">
+        USERNAME:</div>
+      <div class="user-name information-content">{{chosenUser.username}}</div>
+    </div>
+    <div class="user-fullname-container information-container">
+      <div class="user-fullname-title information-title">
+        FULLNAME:</div>
+      <div class="user-fullname information-content">{{chosenUser.fullname}}</div>
+    </div>
+
+    <div class="gender-age-container ">
+      <div class="user-gender-container information-container">
+        <div class="user-gender-title information-title">
+          GENDER:</div>
+        <div class="user-gender information-content">{{chosenUser.gender}}</div>
+      </div>
+      <div class="user-age-container information-container">
+        <div class="user-age-title information-title">
+          AGE:</div>
+        <div class="user-age information-content">{{chosenUser.age}}</div>
+      </div>
+    </div>
+
+    <div class="user-birthday-container information-container">
+      <div class="user-birthday-title information-title">
+        BIRTHDAY:</div>
+      <div class="user-birthday information-content">{{chosenUser.birthday}}</div>
+    </div>
+  </div>
 </div>

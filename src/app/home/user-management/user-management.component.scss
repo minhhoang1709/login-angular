@@ -2,7 +2,7 @@
 
 table.dataTable thead .sorting_asc:nth-child(3) {
   background-image: url('../../../assets/icons/icn-ascending-softer.svg');
-  background-position: 71.02% 50%;
+  background-position: 95.02% 50%;
 
 }
 
@@ -14,7 +14,7 @@ table.dataTable thead .sorting_asc:nth-child(4) {
 
 table.dataTable thead .sorting_desc:nth-child(3) {
   background-image: url('../../../assets/icons/icn-descending-softer.svg');
-  background-position: 71.02% 50%;
+  background-position: 95.02% 50%;
 
 }
 
@@ -25,7 +25,7 @@ table.dataTable thead .sorting_desc:nth-child(4) {
 
 table.dataTable thead .sorting:nth-child(3) {
   background-image: url('../../../assets/icons/icn-softer.svg');
-  background-position: 71.02% 50%;
+  background-position: 95.02% 50%;
 }
 
 table.dataTable thead .sorting:nth-child(4) {
@@ -49,8 +49,6 @@ table.dataTable.no-footer {
   border-bottom: 0px;
 }
 
-
-
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -67,10 +65,22 @@ button:focus {
   outline: none;
 }
 
-.transactions-header {
+.user-management-container {
+  margin-top: 70px;
+  padding-left: 30px;
+  padding-right: 30px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+}
+
+.users-table {
+  width: 65%
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
 }
 
 .filter-container {
@@ -88,7 +98,7 @@ button:focus {
   height: 14.4px;
 }
 
-.basic-filter-select {
+.filter-select {
   width: 130px;
   height: 30px;
   border: 1px solid #C6CACC;
@@ -135,7 +145,7 @@ button:focus {
   cursor: pointer;
 }
 
-.total-transactions {
+.total-users {
   font-family: SF-Pro-Display;
   font-weight: 700;
   color: #3E4345;
@@ -145,34 +155,26 @@ button:focus {
   align-self: flex-end;
 }
 
-.asset-sorter {
-  width: 9.23%;
+.username-sorter {
+  width: 13.23%;
 }
 
-.transactions-sorter {
-  width: 15.79%;
+.fullname-sorter {
+  width: 21.79%;
 }
 
-.date-sorter {
-  width: 15.44%;
-
-}
-
-.amount-sorter {
-  width: 15.53%;
+.gender-sorter {
+  width: 7.44%;
 
 }
 
-.from-sorter {
-  width: 15.79%;
+.age-sorter {
+  width: 11.53%;
+
 }
 
-.to-sorter {
-  width: 15.79%;
-}
-
-.status-sorter {
-  width: 12.72%;
+.birthday-sorter {
+  width: 17.79%;
 }
 
 table.dataTable thead {
@@ -197,7 +199,7 @@ table.dataTable tr {
   text-align: center;
   font-family: SF-Pro-Display;
   font-weight: 500;
-
+  cursor: pointer;
 }
 
 table.dataTable td {
@@ -206,51 +208,42 @@ table.dataTable td {
   border-bottom: 1px solid #E3E5E6;
 }
 
-.asset-item {
-  background-repeat: no-repeat;
-  background-size: 24.77px 24.77px;
-  background-position: 22.27% 50%;
-  padding-left: 4.1% !important;
-  text-align: start;
 
+::ng-deep .top {
+  width: 250px;
+  margin-left: 690px;
+  margin-bottom: -40px;
 }
 
-.btc {
-  background-image: url('../../../assets/icons/crypto-tokens/crypto-btc.svg');
-}
+// ::ng-deep .dataTables_wrapper .dataTables_filter {
+//   padding-bottom: 15px;
+//   height: 30px;
 
-.basic {
-  background-image: url('../../../assets/icons/crypto-tokens/crypto-basic.svg');
-}
+// }
 
-.eth {
-  background-image: url('../../../assets/icons/crypto-tokens/crypto-eth.svg');
-}
+// ::ng-deep .dataTables_wrapper .dataTables_filter input {
+//   height: 30px;
+//   border-radius: 4px;
+//   border: 1px solid #C6CACC !important;
+//   font-family: SF-Pro-Display;
+//   font-weight: 500;
+//   font-size: 14px;
+// }
 
-.transaction-item {
-  background-image: url('../../../assets/icons/icn-li-style.svg');
-  background-repeat: no-repeat;
-  background-position: 22.22% 50%;
-  padding-left: 5.26% !important;
-
-}
-
-.transaction-type {
-  width: 50%;
-}
-
-::ng-deep .transaction-info {
-  height: 161px;
-  background-color: #F1F3F4;
-  margin-bottom: 76px;
-}
+// ::ng-deep .dataTables_wrapper .dataTables_filter label {
+//   height: 30px;
+//   font-family: SF-Pro-Display !important;
+//   font-weight: 700;
+//   font-size: 14px;
+//   line-height: 20px;
+// }
 
 ::ng-deep .bottom {
   height: 44px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 200px;
+  margin-top: 20px;
 }
 
 ::ng-deep .dataTables_paginate {
@@ -331,4 +324,87 @@ table.dataTable td {
 
 ::ng-deep .paginate_button.last.disabled {
   background: url('../../../assets/icons/icn-pagging-end-disabled.svg') no-repeat center !important;
+}
+
+.user-information-container {
+  width: 30%;
+}
+
+.user-information-title {
+  width: 40%;
+  font-family: SF-Pro-Display;
+  font-weight: 900;
+  border-bottom: 1.5px solid #C6CACC;
+  color: #C6CACC
+}
+
+.user-name-container {
+  margin-top: 50px;
+}
+
+.user-name {
+  width: 75%;
+}
+
+.user-fullname-container {
+  margin-top: 20px;
+}
+
+.user-fullname {
+  width: 75%;
+}
+
+.gender-age-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.user-gender-container {
+  width: 55%;
+}
+
+.user-gender {
+  width: 55%;
+}
+
+.user-age-container {
+  width: 35%;
+}
+
+.user-age {
+  width: 70%;
+}
+
+.user-birthday-container {
+  margin-top: 20px;
+
+}
+
+.user-birthday {
+  width: 75%;
+}
+
+.information-container {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.information-title {
+  display: flex;
+  align-items: center;
+  font-family: SF-Pro-Display;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.information-content {
+  border-bottom: 3px solid turquoise;
+  font-family: SF-Pro-Display;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  font-style: italic;
 }
