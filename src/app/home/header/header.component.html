@@ -1,7 +1,11 @@
 <div class="header">
-  <a class="logo">IBCT Dashboard</a>
+  <a [routerLink]="['/home']">IBCT Dashboard</a>
   <div class="header-right">
-    <a class="active">Profile</a>
+
+    <a [routerLink]="['/home/information']">Profile</a>
+
+    <a [routerLink]="['/home/users-management']">UserManagement</a>
+
     <a class="logout" (click)="logout()">Logout</a>
   </div>
 </div>

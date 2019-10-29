@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,22 +11,22 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
   showPassFlag: number;
   showConfirmPassFlag: number;
-  adminMode: boolean;
+  usernameErrorMessage: string;
+  emailErrorMessage: string;
+  passwordErrorMessage: string;
+  confirmErrorMessage: string;
   @ViewChild('eyeDiv', { static: true }) eyeDivRef: ElementRef;
   @ViewChild('eyeConfirmDiv', { static: true }) eyeConfirmDivRef: ElementRef;
   @ViewChild('inputPass', { static: true }) inputPassRef: ElementRef;
   @ViewChild('inputConfirmPass', { static: true }) inputConfirmPassRef: ElementRef;
   @ViewChild('input100', { static: true }) input100Ref: ElementRef;
+  @ViewChild('inputEmail', { static: true }) inputEmailRef: ElementRef;
+  patt = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   constructor(private renderer: Renderer2, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.showPassFlag = 0;
     this.showConfirmPassFlag = 0;
-    this.adminMode = false;
-  }
-
-  onSwitch() {
-    this.adminMode = !this.adminMode;
   }
 
   onBlur() {
@@ -33,6 +34,12 @@ export class SignUpComponent implements OnInit {
       this.renderer.addClass(this.input100Ref.nativeElement, 'has-val');
     } else {
       this.renderer.removeClass(this.input100Ref.nativeElement, 'has-val');
+    }
+
+    if (this.inputEmailRef.nativeElement.value.trim() !== '') {
+      this.renderer.addClass(this.inputEmailRef.nativeElement, 'has-val');
+    } else {
+      this.renderer.removeClass(this.inputEmailRef.nativeElement, 'has-val');
     }
 
     if (this.inputPassRef.nativeElement.value.trim() !== '') {
@@ -49,27 +56,14 @@ export class SignUpComponent implements OnInit {
 
   }
 
-  validate() {
-    if (this.input100Ref.nativeElement.value.trim() === '') {
-      this.showValidate(this.input100Ref);
-      return false;
-    }
 
-    if (this.inputPassRef.nativeElement.value.trim() === '') {
-      this.showValidate(this.inputPassRef);
-      return false;
-    }
-
-    if (this.inputConfirmPassRef.nativeElement.value.trim() !== this.inputPassRef.nativeElement.value.trim()) {
-      this.showValidate(this.inputConfirmPassRef);
-      return false;
-    }
-
-    return true;
-  }
 
   onUsernameFocus() {
     this.hideValidate(this.input100Ref);
+  }
+
+  onEmailFocus() {
+    this.hideValidate(this.inputEmailRef);
   }
 
   onPasswordFocus() {
@@ -118,19 +112,69 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  onSignup(postData: { username: string; password: string }) {
+  validate() {
+    let flag = true;
+
+    if (this.input100Ref.nativeElement.value.trim() === '') {
+      this.usernameErrorMessage = 'Enter username !';
+      this.showValidate(this.input100Ref);
+      flag = false;
+    }
+
+    if (!this.patt.test(this.inputEmailRef.nativeElement.value.trim())) {
+      this.emailErrorMessage = 'Enter email !';
+      this.showValidate(this.inputEmailRef);
+      flag = false;
+    }
+
+    if (this.inputPassRef.nativeElement.value.trim() === '') {
+      this.passwordErrorMessage = 'Enter password !';
+      this.showValidate(this.inputPassRef);
+      flag = false;
+    }
+
+    if (this.inputConfirmPassRef.nativeElement.value.trim() !== this.inputPassRef.nativeElement.value.trim()) {
+      this.confirmErrorMessage = 'Not match !';
+      this.showValidate(this.inputConfirmPassRef);
+      flag = false;
+    }
+    return flag;
+  }
+
+  onSignup(postData: { username: string; password: string; email: string }) {
     if (this.validate()) {
-      if (this.adminMode) {
-        this.authService.adminSignup(postData.username, postData.password).subscribe(
-          result => this.router.navigate(['/log-in']),
-          err => alert("Account has existed !")
-        );
-      } else {
-        this.authService.userSignup(postData.username, postData.password).subscribe(
-          result => this.router.navigate(['/log-in']),
-          err => alert("Account has existed !")
-        );
-      }
+      this.authService.signup(postData.username, postData.password, postData.email).subscribe(
+        result => {
+          if (result.messageCode === 'MSG01_REGISTERED') {
+
+            Swal.fire({
+              title: 'Success!',
+              text: 'You successfully registed',
+              type: 'success'
+            });
+            localStorage.setItem('verifiedEmail', postData.email);
+            this.router.navigate(['/verification']);
+          }
+        },
+        err => {
+          if (err.error.messageCode === 'MSG04_USERNAME_EMAIL_IN_USE') {
+            this.usernameErrorMessage = 'Username in use !';
+            this.emailErrorMessage = 'Email in use !';
+            this.showValidate(this.input100Ref);
+            this.showValidate(this.inputEmailRef);
+          }
+
+          if (err.error.messageCode === 'MSG02_USERNAME_IN_USE') {
+            this.usernameErrorMessage = 'Username in use !';
+            this.showValidate(this.input100Ref);
+          }
+
+          if (err.error.messageCode === 'MSG03_EMAIL_IN_USE') {
+            this.emailErrorMessage = 'Email in use !';
+            this.showValidate(this.inputEmailRef);
+          }
+        }
+      );
     }
   }
 }

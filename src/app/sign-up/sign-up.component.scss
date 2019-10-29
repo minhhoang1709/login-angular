@@ -213,7 +213,8 @@ iframe {
   border-radius: 10px;
   overflow: hidden;
   padding: 77px 55px 33px 55px;
-
+  margin: 30px auto;
+  left: 50%;
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -240,7 +241,7 @@ iframe {
 }
 
 .welcome-title {
-  padding-bottom: 26px;
+  padding-bottom: 40px;
 
 }
 
@@ -276,7 +277,7 @@ iframe {
 }
 
 .text-center {
-  padding-top: 115px;
+  padding-top: 80px;
 }
 
 /*---------------------------------------------*/
@@ -532,74 +533,4 @@ iframe {
     visibility: visible;
     opacity: 1;
   }
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked+.slider {
-  background-color: #2196F3;
-}
-
-input:focus+.slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-.admin-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: SF-Pro-Display;
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 20px;
 }

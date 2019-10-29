@@ -1,0 +1,94 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="container-content">
+      <div class="wrap-login100">
+        <span class="login100-form-title welcome-title">
+          Update Profile
+        </span>
+        <form #signupForm="ngForm">
+          <div class="wrap-input100 validate-input" data-validate="Enter Fullname !">
+            <input class="input100" [(ngModel)]="user.userFullName" type="text" name="fullname"
+              (focus)="onFullnameFocus()" (blur)="onBlur()" #inputFullname>
+            <span class="focus-input100" data-placeholder="Fullname"></span>
+          </div>
+
+          <div class="wrap-orther-input">Gender:
+            <div class="orther-input-container">
+              <label class="container">Male
+                <input type="radio" value="MALE" [(ngModel)]="user.userGender" name="radio">
+                <span class="checkmark"></span>
+              </label>
+              <label class="container">Female
+                <input type="radio" value="FEMALE" [(ngModel)]="user.userGender" name="radio">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="wrap-orther-input">Birthday:
+            <div class="orther-input-container">
+              <input class="birthday-picker" type="date" [ngModel]="user.userBirthday | date:'yyyy-MM-dd'"
+                name="birthday" #inputBirthday>
+            </div>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate="Enter Phone !">
+            <input class="input100" type="text" [(ngModel)]="user.userPhonenumber" name="phone" (focus)="onPhoneFocus()"
+              (blur)="onBlur()" #inputPhone>
+            <span class="focus-input100" data-placeholder="Phone Number"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate="Enter Address !">
+            <input class="input100" type="text" [(ngModel)]="user.userAddress" name="address" (focus)="onAddressFocus()"
+              (blur)="onBlur()" #inputAddress>
+            <span class="focus-input100" data-placeholder="Address"></span>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" (click)="onUpdateProfile()">
+                Update
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="wrap-login100 reset-form">
+        <span class="login100-form-title welcome-title">
+          Change Password
+        </span>
+        <form #resetForm="ngForm" (ngSubmit)="onChangePassword(resetForm.value)">
+          <div class="wrap-input100 validate-input" data-validate="Empty !">
+            <input class="input100" type="password" ngModel name="oldPassword" (focus)="onOldPassFocus()"
+              (blur)="onBlur()" #inputOldPass>
+            <span class="focus-input100" data-placeholder="Old Password"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate="Empty !">
+            <input class="input100" type="password" ngModel name="newPassword" (focus)="onNewPassFocus()"
+              (blur)="onBlur()" #inputNewPass>
+            <span class="focus-input100" data-placeholder="New Password"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input" data-validate="Not match !">
+            <input class="input100" type="password" ngModel name="confirm" (focus)="onConfirmFocus()" (blur)="onBlur()"
+              #inputConfirm>
+            <span class="focus-input100" data-placeholder="Confirm New Password"></span>
+          </div>
+
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button class="login100-form-btn" type="submit">
+                Change
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

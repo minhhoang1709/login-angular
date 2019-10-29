@@ -1,46 +1,32 @@
 <div class="user-management-container">
   <div class="users-table">
-    <div class="table-header">
-      <div class="filter-container">
 
-        <div class="gender-filter">
-          <select name="asset-select" class="filter-select" id="gendder-select">
-            <option class="placeholder-option" value="" hidden disabled selected>Gender</option>
-            <option class="filter-option all-option" value=" 0">All</option>
-            <option class="filter-option" value="1">Male</option>
-            <option class="filter-option" value="2">Female</option>
-          </select>
-        </div>
-
-        <div class="searching-button">
-          search
-        </div>
-      </div>
-      <div class="total-users">
-        Total Users 179
-      </div>
-    </div>
 
     <table datatable [dtOptions]="dtOptions" class="row-border hover">
       <thead>
         <tr>
-          <th class="username-sorter">Username</th>
-          <th class="fullname-sorter">Fullname</th>
+          <th class="username-sorter">Fullname</th>
+          <th class="fullname-sorter">Address</th>
           <th class="gender-sorter">Gender</th>
-          <th class="age-sorter">Age</th>
-          <th class="birthday-sorter">Birthday</th>
+          <th class="age-sorter">Birthday</th>
+          <th class="birthday-sorter">Phonenumber</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="USER_DATA?.length != 0">
         <tr *ngFor=" let element of USER_DATA" (click)="someClickHandler(element)">
-          <td>{{ element.username }}</td>
-          <td>{{ element.fullname }}</td>
-          <td>{{ element.gender }}</td>
-          <td>{{ element.age }}</td>
-          <td>{{ element.birthday }}</td>
+          <td>{{ element.userFullName }}</td>
+          <td>{{ element.userAddress }}</td>
+          <td>{{ element.userGender }}</td>
+          <td>{{ element.userBirthday }}</td>
+          <td>{{ element.userPhonenumber }}</td>
 
         </tr>
       </tbody>
+      <tbody *ngIf="USER_DATA?.length == 0">
+        <tr>
+          <td colspan="3" class="no-data-available">No data!</td>
+        </tr>
+      <tbody>
     </table>
   </div>
 
@@ -51,31 +37,47 @@
     <div class="user-name-container information-container">
       <div class="user-name-title information-title">
         USERNAME:</div>
-      <div class="user-name information-content">{{chosenUser.username}}</div>
+      <div class="user-name information-content">{{chosenUser.userName}}</div>
     </div>
     <div class="user-fullname-container information-container">
       <div class="user-fullname-title information-title">
         FULLNAME:</div>
-      <div class="user-fullname information-content">{{chosenUser.fullname}}</div>
+      <div class="user-fullname information-content">{{chosenUser.userFullName}}</div>
+    </div>
+    <div class="user-fullname-container information-container">
+      <div class="user-fullname-title information-title">
+        PHONENUMBER:</div>
+      <div class="user-fullname information-content">{{chosenUser.userPhonenumber}}</div>
     </div>
 
     <div class="gender-age-container ">
       <div class="user-gender-container information-container">
         <div class="user-gender-title information-title">
-          GENDER:</div>
-        <div class="user-gender information-content">{{chosenUser.gender}}</div>
+          BIRTHDAY:</div>
+        <div class="user-gender information-content">{{chosenUser.userBirthday}}</div>
       </div>
       <div class="user-age-container information-container">
         <div class="user-age-title information-title">
-          AGE:</div>
-        <div class="user-age information-content">{{chosenUser.age}}</div>
+          GENDER:</div>
+        <div class="user-age information-content">{{chosenUser.userGender}}</div>
       </div>
     </div>
 
     <div class="user-birthday-container information-container">
       <div class="user-birthday-title information-title">
-        BIRTHDAY:</div>
-      <div class="user-birthday information-content">{{chosenUser.birthday}}</div>
+        ADDRESS:</div>
+      <div class="user-birthday information-content">{{chosenUser.userAddress}}</div>
     </div>
+    <div class="user-birthday-container information-container">
+      <div class="user-birthday-title information-title">
+        CREATED DATE:</div>
+      <div class="user-birthday information-content">{{chosenUser.userCreatedDate}}</div>
+    </div>
+    <div class="user-birthday-container information-container">
+      <div class="user-birthday-title information-title">
+        EMAIL:</div>
+      <div class="user-birthday information-content">{{chosenUser.userEmail}}</div>
+    </div>
+    <!-- <button class="btn-delete" (click)=onDeleteUser()>DELETE USER</button> -->
   </div>
 </div>
