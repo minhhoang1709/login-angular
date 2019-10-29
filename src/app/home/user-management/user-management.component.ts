@@ -2,13 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 export interface UserElement {
-  username: string;
-  fullname: string;
-  birthday: string;
-  gender: string;
-  age: number;
+  userId: number;
+  userName: string;
+  userCreatedDate: string;
+  userUpdatedDate: string;
+  userEmail: string;
+  userFullName: number;
+  userGender: string;
+  userBirthday: string;
+  userPhonenumber: string;
+  userAddress: string;
 }
 
 @Component({
@@ -25,7 +32,7 @@ export class UserManagementComponent implements OnInit {
   user;
   dtOptions: DataTables.Settings = {};
 
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private http: HttpClient) {
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private http: HttpClient, private router: Router) {
     this.matIconRegistry.addSvgIcon(
       'basic-datepicker-icon',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/icons/icn_calendar.svg')
@@ -36,47 +43,56 @@ export class UserManagementComponent implements OnInit {
     this.chosenUser = info;
   }
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
-
-    this.onGetUserList().subscribe((res) => {
-      this.USER_DATA = res;
-    });
-
-    this.assetsList = this.USER_DATA.map(a => a.username);
-    this.assetsList = this.assetsList.filter((item, index) => this.assetsList.indexOf(item) === index);
+    this.onGetUserList().subscribe(
+      result => {
+        this.USER_DATA = result;
+      },
+      err => {
+        if (err.error.message !== '') {
+          Swal.fire({
+            title: 'Permission needed!',
+            text: 'You need permission to access this page',
+            type: 'error'
+          });
+          this.router.navigate(['/home/information']);
+        }
+      }
+    );
 
     this.dtOptions = {
-      dom: '<"top"i>rt<"bottom"p><"clear">',
+      dom: '<"top"fi>rt<"bottom"p><"clear">',
       pagingType: 'full_numbers',
-      stateSave: true,
-      searching: false,
-      pageLength: 2,
       serverSide: true,
-      processing: true,
-      lengthChange: true,
+      searching: false,
       info: false,
+      ajax: () => {
+        this.http
+          .get<any>(
+            'http://localhost:8085/api/user/list', {
+            headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwtToken'))
+          }
+          ).subscribe(resp => {
+            this.USER_DATA = resp;
+
+          });
+      },
       columns: [{
-        title: 'Username',
-        data: 'username'
+        data: 'userFullName'
       }, {
-        title: 'Fullname',
-        data: 'fullname'
+        data: 'userGender'
       }, {
-        title: 'Gender',
-        data: 'gender'
+        data: 'userBirthday'
       }, {
-        title: 'Age',
-        data: 'age'
+        data: 'userPhonenumber'
       }, {
-        title: 'Birthday',
-        data: 'birthday'
+        data: 'userAddress'
       }],
     };
   }
 
   onGetUserList() {
-    return this.http.get<any>('http://localhost:3000/api/admin/list-users', {
-      headers: new HttpHeaders().set('Authorization', this.user.jwt)
+    return this.http.get<any>('http://localhost:8085/api/user/list', {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem('jwtToken'))
     });
   }
 

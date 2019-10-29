@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-log-in',
@@ -10,15 +11,18 @@ import { AuthService } from '../shared/auth.service';
 export class LogInComponent implements OnInit {
   showPassFlag: number;
   adminMode: boolean;
+  verifiedEmail: string;
+  messageAlert: string;
   @ViewChild('eyeDiv', { static: true }) eyeDivRef: ElementRef;
   @ViewChild('inputPass', { static: true }) inputPassRef: ElementRef;
   @ViewChild('input100', { static: true }) input100Ref: ElementRef;
 
   ngOnInit() {
     this.showPassFlag = 0;
-    this.adminMode = false;
-    console.log(this.eyeDivRef);
-    console.log(this.inputPassRef);
+    this.verifiedEmail = localStorage.getItem('verifiedEmail');
+    if (this.verifiedEmail != null) {
+      this.renderer.addClass(this.input100Ref.nativeElement, 'has-val');
+    }
   }
 
   constructor(private renderer: Renderer2, private authService: AuthService, private router: Router) {
@@ -90,17 +94,24 @@ export class LogInComponent implements OnInit {
 
   onLogin(postData: { username: string; password: string }) {
     if (this.validate()) {
-      if (this.adminMode) {
-        this.authService.adminLogin(postData.username, postData.password).subscribe(
-          result => this.router.navigate(['/home']),
-          err => alert("Wrong username or password")
-        );
-      } else {
-        this.authService.userLogin(postData.username, postData.password).subscribe(
-          result => this.router.navigate(['/home']),
-          err => alert("Wrong username or password")
-        );
-      }
+      localStorage.setItem('credential', postData.username);
+      this.authService.login(postData.username, postData.password).subscribe(
+        result => {
+          localStorage.setItem('jwtToken', result.accessToken);
+          this.router.navigate(['/home']);
+        },
+        err => {
+          if (err.error.message === 'Bad credentials') {
+            this.messageAlert = 'Username or password was wrong';
+          } else if (err.error.message === 'User is disabled') {
+            this.messageAlert = 'Your account is not verified, please verify your email before log-in';
+          }
+          Swal.fire({
+            title: 'Error!',
+            text: this.messageAlert,
+            type: 'error'
+          });
+        });
     }
   }
 }

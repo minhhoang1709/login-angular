@@ -9,9 +9,17 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  routePos: string;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.routePos = 'home';
+  }
+
+  routeChanges(routePos) {
+    this.routePos = routePos;
+    console.log(this.routePos);
   }
 
   logout() {

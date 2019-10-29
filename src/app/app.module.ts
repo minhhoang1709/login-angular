@@ -13,12 +13,12 @@ import { UserManagementComponent } from './home/user-management/user-management.
 import { MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatIconModule } from '@angular/material';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
-import { ProfileComponent } from './home/profile/profile.component';
 import { FormsModule } from '@angular/forms';
-import { AdminHomeComponent } from './home/admin-home/admin-home.component';
-import { AdminHeaderComponent } from './home/admin-home/admin-header/admin-header.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AuthGuard } from './shared/auth-guard.service';
+import { StepProgressBarComponent } from './step-progress-bar/step-progress-bar.component';
+import { VerificationComponent } from './verification/verification.component';
+import { InformationComponent } from './information/information.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +30,9 @@ import { AuthGuard } from './shared/auth-guard.service';
     LogInComponent,
     PasswordShowDirective,
     UserManagementComponent,
-    ProfileComponent,
-    AdminHomeComponent,
-    AdminHeaderComponent
+    StepProgressBarComponent,
+    VerificationComponent,
+    InformationComponent
 
   ],
   imports: [

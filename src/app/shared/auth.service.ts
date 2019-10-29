@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -10,53 +7,25 @@ import { throwError } from 'rxjs';
 
 export class AuthService {
     constructor(private http: HttpClient) {
-
     }
 
-    adminLogin(username: string, password: string) {
-        return this.http.post<any>('http://localhost:3000/api/admin/login', { username, password }).pipe(tap(res => {
-            localStorage.setItem('currentUser', JSON.stringify(res));
-        }), catchError((errorResponse: HttpErrorResponse) => {
-            return throwError(errorResponse);
-        })
-        );
+    login(userNameOrUserEmail: string, userPass: string) {
+        return this.http.post<any>('http://localhost:8085/api/auth/signin', { userNameOrUserEmail, userPass });
     }
 
-    userLogin(username: string, password: string) {
-        return this.http.post<any>('http://localhost:3000/api/user/login', { username, password }).pipe(tap(res => {
-            localStorage.setItem('currentUser', JSON.stringify(res));
-        }), catchError((errorResponse: HttpErrorResponse) => {
-            return throwError(errorResponse);
-        })
-        );
-    }
-
-    adminSignup(username: string, password: string) {
-        return this.http.post<any>('http://localhost:3000/api/admin/signup', { username, password }).pipe(tap(res => {
-            this.adminLogin(username, password);
-        }), catchError((errorResponse: HttpErrorResponse) => {
-            return throwError(errorResponse);
-        })
-        );
-    }
-
-    userSignup(username: string, password: string) {
-        return this.http.post<any>('http://localhost:3000/api/user/signup', { username, password }).pipe(tap(res => {
-            this.userLogin(username, password);
-        }), catchError((errorResponse: HttpErrorResponse) => {
-            return throwError(errorResponse);
-        })
-        );
+    signup(userName: string, userPass: string, userEmail: string) {
+        return this.http.post<any>('http://localhost:8085/api/auth/signup', { userName, userPass, userEmail });
     }
 
     onLogout() {
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('credential');
+        localStorage.removeItem('verifiedEmail');
     }
 
     public loggedIn(): boolean {
-        return localStorage.getItem('currentUser') !== null;
+        return localStorage.getItem('jwtToken') !== null;
     }
-
 
     isAuthenticated() {
         const promise = new Promise(

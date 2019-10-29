@@ -3,18 +3,8 @@
 @import '../../assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
 
 
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-
-* {
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
-}
-
 body,
 html {
-  height: 100%;
   font-family: OpenSans-Regular;
 }
 
@@ -194,27 +184,34 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;
-  min-height: 100vh;
+  min-height: 96vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  direction: flex-row;
   justify-content: center;
   align-items: center;
   padding: 15px;
   background: #f2f2f2;
 }
 
+.container-content {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .wrap-login100 {
-  width: 390px;
+  width: 300px;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
   padding: 77px 55px 33px 55px;
-
+  margin: 30px auto;
+  left: 50%;
   box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -222,6 +219,9 @@ iframe {
   -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
+.reset-form {
+  height: 370px;
+}
 
 /*------------------------------------------------------------------
 [ Form ]*/
@@ -241,7 +241,8 @@ iframe {
 }
 
 .welcome-title {
-  padding-bottom: 26px;
+  padding-bottom: 40px;
+
 }
 
 .welcome-logo {
@@ -259,7 +260,7 @@ iframe {
   width: 100%;
   position: relative;
   border-bottom: 2px solid #adadad;
-  margin-bottom: 37px;
+  margin-bottom: 30px;
 }
 
 .input100 {
@@ -275,8 +276,37 @@ iframe {
   padding: 0 5px;
 }
 
+.wrap-orther-input {
+  width: 100%;
+  position: relative;
+  margin-bottom: 30px;
+  height: 35px;
+  line-height: 35px;
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  color: #adadad;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 5px;
+
+}
+
+.orther-input-container {
+  color: #555555 !important;
+}
+
+
+.birthday-picker {
+  height: 30px;
+  font-family: OpenSans-Regular;
+  font-size: 15px;
+  color: #adadad;
+  border: #6a7dfe 2px solid;
+  border-radius: 5px;
+}
+
 .text-center {
-  padding-top: 115px;
+  padding-top: 80px;
 }
 
 /*---------------------------------------------*/
@@ -346,46 +376,6 @@ iframe {
 .has-val.input100+.focus-input100::before {
   width: 100%;
 }
-
-/*---------------------------------------------*/
-.btn-show-pass {
-  font-size: 15px;
-  color: #999999;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  height: 100%;
-  top: 0;
-  right: 0;
-  padding-right: 5px;
-  cursor: pointer;
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
-}
-
-.btn-show-pass:hover {
-  color: #6a7dfe;
-  color: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-  color: -o-linear-gradient(left, #21d4fd, #b721ff);
-  color: -moz-linear-gradient(left, #21d4fd, #b721ff);
-  color: linear-gradient(left, #21d4fd, #b721ff);
-}
-
-.btn-show-pass.active {
-  color: #6a7dfe;
-  color: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-  color: -o-linear-gradient(left, #21d4fd, #b721ff);
-  color: -moz-linear-gradient(left, #21d4fd, #b721ff);
-  color: linear-gradient(left, #21d4fd, #b721ff);
-}
-
 
 
 /*------------------------------------------------------------------
@@ -532,4 +522,76 @@ iframe {
     visibility: visible;
     opacity: 1;
   }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* The container */
+.container {
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: OpenSans-Regular;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-left: 10px;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked~.checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }
